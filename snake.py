@@ -39,6 +39,15 @@ class Snake():
     def move_forward(self):
         prev_pos = self.snake[0].pos()
         self.snake[0].fd(20)
+
+        x, y = self.snake[0].pos()
+        if x > 290:   x = -290
+        if x < -290:  x = 290
+        if y > 290:   y = -290
+        if y < -290:  y = 290
+        
+        self.snake[0].goto(x, y)
+
         for s in self.snake[1:]:
             temp = s.pos()
             s.goto(prev_pos)
@@ -73,5 +82,9 @@ class Snake():
     def did_snake_ate_food(self, obj):
         return self.snake[0].distance(obj) < 15
     
-    def did_snake_ate_itself(self, obj):
-        return self.snake[0].pos() == obj.pos()
+    def did_snake_ate_itself(self):
+        for segment in self.snake[2:]:
+            if self.snake[0].distance(segment) < 10:
+                return True
+            
+        return False

@@ -45,9 +45,9 @@ class Game():
                 self.update_screen_title()
                 self.food.change_food_pos()
             
-            for segment in self.snake.snake[1:]:
-                if self.snake.did_snake_ate_itself(segment):
-                    self.game_on = False
+            if self.snake.did_snake_ate_itself():
+                self.game_on = False
+
             self.screen.update()
 
     def update_screen_title(self):
